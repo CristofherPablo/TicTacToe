@@ -15,7 +15,7 @@ body {
   background-color: antiquewhite;
 }
 
-.board {
+#board {
   display: flex;
   flex-wrap: wrap;
   width: 400px;
