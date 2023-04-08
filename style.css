@@ -1,0 +1,22 @@
+*,
+html{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: antiquewhite;
+}
+
+.gameWrapper{
+    width: 400px;
+    height: 400px;
+    background-color: white;
+}
