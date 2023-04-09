@@ -20,16 +20,42 @@
         let cellElement = document.createElement('button');
         cellElement.classList.add('cell');
         cellElement.setAttribute('data-index', index);
+        let div = document.createElement('div');
+        cellElement.appendChild(div);
         this.$board.appendChild(cellElement);
       });
     },
 
-    reset: function(){
-        this.$board.innerHTML = '';
-        this.render();
+    reset: function () {
+      this.$board.innerHTML = '';
+      this.render();
+    },
+  };
+
+  var gamePlay = {
+    init: function () {
+      this.cacheDom();
+      this.bindEvents();
+    },
+
+    cacheDom: function () {
+      this.$buttons = document.querySelectorAll('#board button');
+    },
+
+    bindEvents: function () {
+      this.$buttons.forEach((button) => {
+        button.addEventListener('click', this.addPlayerSymbol.bind(this));
+      });
+    },
+
+    render: function () {},
+
+    addPlayerSymbol: function (event) {
+      let $div = event.target.querySelector('div');
+      $div.classList.add('circle');
     },
   };
 
   gameBoard.init();
-  console.log(gameBoard.startCells);
+  gamePlay.init();
 })();
