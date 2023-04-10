@@ -46,6 +46,7 @@ body {
   width: 100px;
   height: 100px;
   transform: rotate(45deg);
+  box-sizing: border-box;
 }
 
 .cross::after,
@@ -62,8 +63,8 @@ body {
     height: 100%;
   }
 .cross::after {
-    top: 50%;
-    height: 30%;
-    margin-top: -15%;
-    width: 100%;
+  top: 50%;
+  height: 30%;
+  margin-top: -15%;
+  width: 100%;
 }
