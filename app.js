@@ -66,7 +66,9 @@
 
     bindEvents: function () {
       this.$buttons.forEach((button) => {
-        button.addEventListener('click', this.addPlayerSymbol.bind(this));
+        button.addEventListener('click', this.addPlayerSymbol.bind(this), {
+          once: true,
+        });
       });
     },
 
@@ -87,12 +89,12 @@
       if (playerOneScore.length + playerTwoScore.length > 4) {
         for (let index = 0; index < this.possibleVictories.length; index++) {
           const victory = this.possibleVictories[index];
-          console.log(playerOneScore);
-          console.log(victory.every((item) => playerOneScore.includes(item)));
           if (victory.every((item) => playerOneScore.includes(item))) {
             return 'Player One';
           } else if (victory.every((item) => playerTwoScore.includes(item))) {
             return 'Player Two';
+          }else if(playerOneScore.length + playerTwoScore.length === 9){
+            return 'I\`s a draw'
           }
         }
       }
@@ -114,7 +116,6 @@
         this.switchPlayers(player);
       }
 
-      event.target.removeEventListener('click', this.addPlayerSymbol);
       console.log(this.checkWinner(player));
     },
   };
