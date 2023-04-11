@@ -32,39 +32,3 @@ body {
   border: 1px solid black;
   box-sizing: border-box;
 }
-
-.circle {
-  width: 100px;
-  height: 100px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  border: 15px solid blue;
-}
-
-.cross {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  transform: rotate(45deg);
-  box-sizing: border-box;
-}
-
-.cross::after,
-.cross::before {
-  content: '';
-  position: absolute;
-  background-color: red;
-}
-
-.cross::before {
-    left: 50%;
-    width: 30%;
-    margin-left: -15%;
-    height: 100%;
-  }
-.cross::after {
-  top: 50%;
-  height: 30%;
-  margin-top: -15%;
-  width: 100%;
-}

@@ -1,8 +1,14 @@
 /* This module create and render the board */
 (function () {
   var player = {
-    playerOne: 1,
-    playerTwo: 0,
+    playerOne: {
+      turn: 1,
+      choices: [],
+    },
+    playerTwo: {
+      turn: 1,
+      choices: [],
+    },
   };
 
   var gameBoard = {
@@ -38,6 +44,17 @@
   };
 
   var gamePlay = {
+    possibleVictories: [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ],
+
     init: function () {
       this.cacheDom();
       this.bindEvents();
@@ -54,24 +71,51 @@
     },
 
     switchPlayers: function (player) {
-      if (player.playerOne === 0) {
-        player.playerOne = 1;
-        player.playerTwo = 0;
+      if (player.playerOne.turn === 0) {
+        player.playerOne.turn = 1;
+        player.playerTwo.turn = 0;
       } else {
-        player.playerOne = 0;
-        player.playerTwo = 1;
+        player.playerOne.turn = 0;
+        player.playerTwo.turn = 1;
+      }
+    },
+
+    checkWinner: function (player) {
+      var playerOneScore = player.playerOne.choices;
+      var playerTwoScore = player.playerTwo.choices;
+
+      if (playerOneScore.length + playerTwoScore.length > 4) {
+        for (let index = 0; index < this.possibleVictories.length; index++) {
+          const victory = this.possibleVictories[index];
+          console.log(playerOneScore);
+          console.log(victory.every((item) => playerOneScore.includes(item)));
+          if (victory.every((item) => playerOneScore.includes(item))) {
+            return 'Player One';
+          } else if (victory.every((item) => playerTwoScore.includes(item))) {
+            return 'Player Two';
+          }
+        }
       }
     },
 
     addPlayerSymbol: function (event) {
+      if (!event.target.matches('button')) return;
+
       let $img = event.target.querySelector('img');
-      if (player.playerOne === 0) {
+      let $index = parseInt(event.target.getAttribute('data-index'));
+
+      if (player.playerOne.turn === 1) {
         $img.src = 'assets/cross.png';
+        player.playerOne.choices.push($index);
         this.switchPlayers(player);
       } else {
         $img.src = 'assets/circle.png';
+        player.playerTwo.choices.push($index);
         this.switchPlayers(player);
       }
+
+      event.target.removeEventListener('click', this.addPlayerSymbol);
+      console.log(this.checkWinner(player));
     },
   };
 
