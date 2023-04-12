@@ -47,6 +47,8 @@ body {
   pointer-events: auto;
 }
 
+/* Overlay div to display the winner and restart button */
+
 .endGame.active{
   display: flex;
   justify-content: center;

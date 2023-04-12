@@ -6,7 +6,7 @@
       choices: [],
     },
     playerTwo: {
-      turn: 1,
+      turn: 0,
       choices: [],
     },
   };
@@ -39,7 +39,12 @@
 
     reset: function () {
       this.$board.innerHTML = '';
+      player.playerOne.turn = 1;
+      player.playerOne.choices = [];
+      player.playerTwo.turn = 0;
+      player.playerTwo.choices = [];
       this.render();
+      gamePlay.init();
     },
   };
 
@@ -62,6 +67,9 @@
 
     cacheDom: function () {
       this.$buttons = document.querySelectorAll('#board button');
+      this.$overlay = document.querySelector('.endGame');
+      this.winnerMessage = document.querySelector('#winnerMessage');
+      this.$restartButton = document.querySelector('#restart');
     },
 
     bindEvents: function () {
@@ -69,6 +77,12 @@
         button.addEventListener('click', this.addPlayerSymbol.bind(this), {
           once: true,
         });
+      });
+
+      this.$restartButton.addEventListener('click', () => {
+        this.winnerMessage.innerText = '';
+        this.$overlay.classList.remove('active');
+        gameBoard.reset();
       });
     },
 
@@ -79,6 +93,18 @@
       } else {
         player.playerOne.turn = 0;
         player.playerTwo.turn = 1;
+      }
+    },
+
+    displayOverlay: function (result) {
+      if (result != undefined) {
+        if (result === 'I`s a draw') {
+          this.winnerMessage.innerText = `${result}`;
+        this.$overlay.classList.add('active');
+        } else {
+          this.winnerMessage.innerText = `${result} Wins!!`;
+          this.$overlay.classList.add('active');
+        }
       }
     },
 
@@ -93,8 +119,8 @@
             return 'Player One';
           } else if (victory.every((item) => playerTwoScore.includes(item))) {
             return 'Player Two';
-          }else if(playerOneScore.length + playerTwoScore.length === 9){
-            return 'I\`s a draw'
+          } else if (playerOneScore.length + playerTwoScore.length === 9) {
+            return 'I`s a draw';
           }
         }
       }
@@ -116,7 +142,7 @@
         this.switchPlayers(player);
       }
 
-      console.log(this.checkWinner(player));
+      this.displayOverlay(this.checkWinner(player));
     },
   };
 
