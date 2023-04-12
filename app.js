@@ -100,7 +100,7 @@
       if (result != undefined) {
         if (result === 'I`s a draw') {
           this.winnerMessage.innerText = `${result}`;
-        this.$overlay.classList.add('active');
+          this.$overlay.classList.add('active');
         } else {
           this.winnerMessage.innerText = `${result} Wins!!`;
           this.$overlay.classList.add('active');
@@ -119,7 +119,11 @@
             return 'Player One';
           } else if (victory.every((item) => playerTwoScore.includes(item))) {
             return 'Player Two';
-          } else if (playerOneScore.length + playerTwoScore.length === 9) {
+          } else if (
+            playerOneScore.length + playerTwoScore.length === 9 &&
+            !victory.every((item) => playerOneScore.includes(item)) &&
+            !victory.every((item) => playerTwoScore.includes(item))
+          ) {
             return 'I`s a draw';
           }
         }
@@ -145,6 +149,8 @@
       this.displayOverlay(this.checkWinner(player));
     },
   };
+
+  var aiMoves = {};
 
   gameBoard.init();
   gamePlay.init();
