@@ -9,6 +9,7 @@
       turn: 0,
       choices: [],
     },
+    round: 0,
   };
 
   var gameBoard = {
@@ -43,6 +44,7 @@
       player.playerOne.choices = [];
       player.playerTwo.turn = 0;
       player.playerTwo.choices = [];
+      player.round = 0;
       this.render();
       gamePlay.init();
     },
@@ -136,6 +138,7 @@
       let $img = event.target.querySelector('img');
       let $index = parseInt(event.target.getAttribute('data-index'));
 
+
       if (player.playerOne.turn === 1) {
         $img.src = 'assets/cross.png';
         player.playerOne.choices.push($index);
@@ -150,8 +153,59 @@
     },
   };
 
-  var aiMoves = {};
+  var aiMoves = {
+
+    pickMove: function(){
+
+      if( player.round === 1 ){
+        if(player.playerOne.choices[0] === 5){
+          player.playerTwo.choices[0] === 3;
+        }else {
+          player.playerTwo.choices[0] === 5;
+        }
+      }else if(player.round === 2){
+
+        if(player.playerOne.choices[0] === 5){
+
+          switch (player.playerOne.choices[0]) {
+            case 1:
+              player.playerTwo.choices[0] = 9;
+              break;
+            case 2:
+              player.playerTwo.choices[0] = 8;
+              break;
+            case 3:
+              player.playerTwo.choices[0] = 7;
+              break;
+            case 4:
+              player.playerTwo.choices[0] = 6;
+              break;
+            case 6:
+              player.playerTwo.choices[0] = 3;
+              break;
+            case 7:
+              player.playerTwo.choices[0] = 3;
+              break;
+            case 8:
+              player.playerTwo.choices[0] = 2;
+              break;
+            case 9:
+              player.playerTwo.choices[0] = 1;
+              break;
+            default:
+                break;
+          };
+        }
+      }else if (player.round === 3){
+
+      }else if(player.round === 4){
+
+      };
+    }
+    
+  };
 
   gameBoard.init();
   gamePlay.init();
+  aiMoves.pickMove();
 })();
