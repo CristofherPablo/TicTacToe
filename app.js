@@ -12,7 +12,7 @@ import { aiMoves } from './aiBrain.js';
       turn: 0,
       choices: [],
     },
-    round: 0,
+    round: 1,
     playerAi: true,
   };
 
@@ -46,7 +46,7 @@ import { aiMoves } from './aiBrain.js';
       player.playerOne.choices = [];
       player.playerTwo.turn = 0;
       player.playerTwo.choices = [];
-      player.round = 0;
+      player.round = 1;
       this.render();
       gamePlay.init();
     },
@@ -135,9 +135,11 @@ import { aiMoves } from './aiBrain.js';
     },
 
     pickAiChoice: function () {
-      aiMoves.init();
+      aiMoves.pickMove(player);
       let indexChoice =
         player.playerTwo.choices[player.playerTwo.choices.length - 1];
+
+        console.log(player.playerTwo.choices);
       const button = document.querySelector(
         `button[data-index="${indexChoice}"]`
       );
@@ -145,6 +147,7 @@ import { aiMoves } from './aiBrain.js';
       let $img = document.createElement('img');
       $img.src = 'assets/circle.png';
       button.appendChild($img);
+      player.round ++;
     },
 
     addPlayerSymbol: function (event) {
@@ -157,7 +160,7 @@ import { aiMoves } from './aiBrain.js';
         $img.src = 'assets/cross.png';
         event.target.appendChild($img);
         player.playerOne.choices.push($index);
-        if (player.playerAi) {
+        if (player.playerAi && player.round != 5) {
           this.pickAiChoice();
         } else {
           this.switchPlayers(player);

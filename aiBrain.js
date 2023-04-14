@@ -1,10 +1,6 @@
-var aiMoves = {
+var aiMoves = (function () {
 
-  init: function () {
-    pickMove();
-  },
-
-  pickMove: function () {
+  function pickMove(player) {
     if (player.round === 1) {
       if (player.playerOne.choices[0] === 4) {
         player.playerTwo.choices[0] = 2;
@@ -814,7 +810,7 @@ var aiMoves = {
           (player.playerTwo.choices.includes(6) &&
             player.playerTwo.choices.includes(8)) ||
           (player.playerTwo.choices.includes(1) &&
-            player.playerTwo.choices.includes(4))
+            player.playerTwo.choices.includes(3))
         ) {
           if (!player.playerOne.choices.includes(7)) {
             player.playerTwo.choices[3] = 7;
@@ -867,12 +863,14 @@ var aiMoves = {
             }
           });
 
-          player.playerTwo.choices[3] = buttonsLeft;
+          player.playerTwo.choices[3] = buttonsLeft[0];
         }
       }
     }
-  },
-};
+  }
+return {
+  pickMove: pickMove
+}
+})();
 
-
-export {aiMoves};
+export { aiMoves };
