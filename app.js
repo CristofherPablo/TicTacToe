@@ -140,6 +140,8 @@ import { aiMoves } from './aiBrain.js';
         player.playerTwo.choices[player.playerTwo.choices.length - 1];
 
         console.log(player.playerTwo.choices);
+        console.log(player.round);
+
       const button = document.querySelector(
         `button[data-index="${indexChoice}"]`
       );
