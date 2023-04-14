@@ -851,8 +851,18 @@ var aiMoves = {
           }
         }
 
-        if(player.playerTwo.choices.length != 4){
-            
+        if (player.playerTwo.choices.length != 4) {
+          const buttons = document.querySelectorAll(".cell button");
+          let buttonsLeft = [];
+
+          buttons.forEach((button) => {
+            if (!button.querySelector('img')) {
+              let index = parseInt(button.getAttribute('data-index'));
+              buttonsLeft.push(index);
+            }
+          });
+
+          player.playerTwo.choices[3] = buttonsLeft;
         }
       }
     }

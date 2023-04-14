@@ -32,8 +32,6 @@
         let cellElement = document.createElement('button');
         cellElement.classList.add('cell');
         cellElement.setAttribute('data-index', index);
-        let img = document.createElement('img');
-        cellElement.appendChild(img);
         this.$board.appendChild(cellElement);
       });
     },
@@ -135,15 +133,17 @@
     addPlayerSymbol: function (event) {
       if (!event.target.matches('button')) return;
 
-      let $img = event.target.querySelector('img');
+      let $img = document.createElement('img');
       let $index = parseInt(event.target.getAttribute('data-index'));
 
       if (player.playerOne.turn === 1) {
         $img.src = 'assets/cross.png';
+        event.target.appendChild($img);
         player.playerOne.choices.push($index);
         this.switchPlayers(player);
       } else {
         $img.src = 'assets/circle.png';
+        event.target.appendChild($img);
         player.playerTwo.choices.push($index);
         this.switchPlayers(player);
       }
