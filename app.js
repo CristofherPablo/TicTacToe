@@ -1,3 +1,6 @@
+/*importing the ai brain fom another file*/
+import { aiMoves } from './aiBrain.js';
+
 /* This module create and render the board */
 (function () {
   var player = {
@@ -10,6 +13,7 @@
       choices: [],
     },
     round: 0,
+    playerAi: true,
   };
 
   var gameBoard = {
@@ -130,6 +134,19 @@
       }
     },
 
+    pickAiChoice: function () {
+      aiMoves.init();
+      let indexChoice =
+        player.playerTwo.choices[player.playerTwo.choices.length - 1];
+      const button = document.querySelector(
+        `button[data-index="${indexChoice}"]`
+      );
+
+      let $img = document.createElement('img');
+      $img.src = 'assets/circle.png';
+      button.appendChild($img);
+    },
+
     addPlayerSymbol: function (event) {
       if (!event.target.matches('button')) return;
 
@@ -140,7 +157,11 @@
         $img.src = 'assets/cross.png';
         event.target.appendChild($img);
         player.playerOne.choices.push($index);
-        this.switchPlayers(player);
+        if (player.playerAi) {
+          this.pickAiChoice();
+        } else {
+          this.switchPlayers(player);
+        }
       } else {
         $img.src = 'assets/circle.png';
         event.target.appendChild($img);

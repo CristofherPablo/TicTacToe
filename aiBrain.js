@@ -1,4 +1,9 @@
 var aiMoves = {
+
+  init: function () {
+    pickMove();
+  },
+
   pickMove: function () {
     if (player.round === 1) {
       if (player.playerOne.choices[0] === 4) {
@@ -852,7 +857,7 @@ var aiMoves = {
         }
 
         if (player.playerTwo.choices.length != 4) {
-          const buttons = document.querySelectorAll(".cell button");
+          const buttons = document.querySelectorAll('.cell button');
           let buttonsLeft = [];
 
           buttons.forEach((button) => {
@@ -868,3 +873,6 @@ var aiMoves = {
     }
   },
 };
+
+
+export {aiMoves};
