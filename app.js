@@ -22,10 +22,14 @@ import { aiMoves } from './aiBrain.js';
     init: function () {
       this.cacheDom();
       this.render();
+      this.bind();
     },
 
     cacheDom: function () {
       this.$board = document.querySelector('#board');
+      this.$playerXplayer = document.querySelector('#playerXplayer');
+      this.$playerXai = document.querySelector('#playerXai');
+      this.$pickPlayerLayar = document.querySelector('.pickPlayer');
     },
 
     render: function () {
@@ -38,6 +42,25 @@ import { aiMoves } from './aiBrain.js';
         cellElement.setAttribute('data-index', index);
         this.$board.appendChild(cellElement);
       });
+    },
+
+    bind: function () {
+      this.$playerXplayer.addEventListener('click', () => {
+        this.gameMode(0).bind(this);
+      });
+
+      this.$playerXai.addEventListener('click', () => {
+        this.gameMode(1).bind(this);
+      });
+    },
+
+    gameMode: function (mode) {
+      if (mode === 0) {
+        player.playerAi = false;
+      } else {
+        player.playerAi = true;
+      }
+      this.$pickPlayerLayar.classList.remove('active');
     },
 
     reset: function () {
@@ -139,8 +162,8 @@ import { aiMoves } from './aiBrain.js';
       let indexChoice =
         player.playerTwo.choices[player.playerTwo.choices.length - 1];
 
-        console.log(player.playerTwo.choices);
-        console.log(player.round);
+      console.log(player.playerTwo.choices);
+      console.log(player.round);
 
       const button = document.querySelector(
         `button[data-index="${indexChoice}"]`
@@ -149,7 +172,7 @@ import { aiMoves } from './aiBrain.js';
       let $img = document.createElement('img');
       $img.src = 'assets/circle.png';
       button.appendChild($img);
-      player.round ++;
+      player.round++;
     },
 
     addPlayerSymbol: function (event) {
