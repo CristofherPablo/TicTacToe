@@ -61,7 +61,6 @@ body {
 }
 */
 
-
 /* Overlay div to display the winner and restart button */
 .endGame {
   position: fixed;
@@ -124,7 +123,7 @@ body {
   flex-direction: column;
 }
 
-.buttonMode{
+.buttonMode {
   display: flex;
   gap: 30px;
 }
