@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script type="module" src="app.js" defer></script>
-    <link rel="shortcut icon" href="assets/tictactoe.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/tictactoe.png" type="image/x-icon" />
     <title>Tic Tac Toe</title>
-</head>
-<body>
-
-    <section id="board">
-    </section>
+  </head>
+  <body>
+    <section id="board"></section>
     <section class="endGame">
-        <div id="winnerMessage"></div>
-        <button id="restart">Restart</button>
+      <div id="winnerMessage"></div>
+      <button id="restart">Restart</button>
     </section>
-    <section class="pickPlayer ">
-        <button id="playerXplayer">
-            Player <span>X</span> Player
-        </button>
-        <button id="playerXai">
-            Player <span>X</span> AI
-        </button>
+    <section class="pickPlayer active">
+      <h1>Choose the playing Mode</h1>
+      <div class="buttonMode">
+        <button id="playerXplayer">Player <span>X</span> Player</button>
+        <button id="playerXai">Player <span>X</span> AI</button>
+      </div>
     </section>
-    
-</body>
+  </body>
 </html>
