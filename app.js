@@ -46,11 +46,11 @@ import { aiMoves } from './aiBrain.js';
 
     bind: function () {
       this.$playerXplayer.addEventListener('click', () => {
-        this.gameMode(0).bind(this);
+        this.gameMode(0);
       });
 
       this.$playerXai.addEventListener('click', () => {
-        this.gameMode(1).bind(this);
+        this.gameMode(1);
       });
     },
 
@@ -161,9 +161,6 @@ import { aiMoves } from './aiBrain.js';
       aiMoves.pickMove(player);
       let indexChoice =
         player.playerTwo.choices[player.playerTwo.choices.length - 1];
-
-      console.log(player.playerTwo.choices);
-      console.log(player.round);
 
       const button = document.querySelector(
         `button[data-index="${indexChoice}"]`
